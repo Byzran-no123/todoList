@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+<body>
+    {% block content %}
+    <form method="POST">
+     {% csrf_token %}
+     <p> Vous etes sure ?<p>
+        <button type="submit">Supprimer</button>
+        <a href="javascript:history.back()">Roteur</a>
+     </form>
+     {% endblock %}
+    </body>

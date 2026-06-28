@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+<body>
+    {% block content %}
+      <nav style="background-color: #0b0bf3;  padding: 8px 15px;
+                border-radius: 5px;font-size: 20px;weight: 100%;">
+                <a style="color: #f1f4f6; text-decoration: none;
+                margin-right: 20px;
+                font-size: 18px;" href="{% url 'deconnexion' %}">Deconnexion</a>
+                 <a style="color: #f1f4f6; text-decoration: none;
+                margin-right: 20px;
+                font-size: 18px;" href="{% url 'listerListe' %}">Voir les taches </a> 
+                     {% if user.is_authenticated and user.is_superuser %}
+            
+                        <a style="color: #f1f4f6; text-decoration: none;
+                        margin-right: 20px;font-size: 18px;" href="{% url 'listerClient' %}">Voir les  aides</a>
+                     {% endif %}
+            </nav>
+    
+    
+<div style="width: 25%;margin:50px auto;height:100px;height:200px;">
+     <div style="display:flex; gap:20px;">
+        <a style="color:blue;text-decoration:none;" href="{% url 'AjouterClient'  %} ">Ajouter aide  </a>
+        <a style="color:blue; text-decoration:none;" href="{% url 'home' %}">    Roteur</a>
+     </div>
+        <br><br>
+    <table border="1">
+        <tr><th>NAME</th><th>Email</th><th>Password</th><th>Métier</th><th>Actions</th>
+        {% for c in clients %}
+            <tr>
+                <td>{{c.nomC}}</td>
+                <td>{{c.email}}</td>
+                <td>{{c.pwd}}</td>
+                <td>{{c.metier}}</td>
+                <td style="padding: 15px;"><a style="color:blue;" href="{% url 'ModifierClient' c.num %} ">Modifier  || </a>
+                    <a style="color:blue;" href="{% url 'SupprimerClient' c.num %} ">Supprimer </a></td>
+            </tr>
+            {% endfor %}
+        </table> 
+    </div>
+    
+            {% endblock %}

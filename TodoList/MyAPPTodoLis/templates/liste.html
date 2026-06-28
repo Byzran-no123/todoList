@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<body style=" margin:0; padding:0;">
+
+    {% block content  %}
+   
+   
+         <nav style="background-color: #0b0bf3;  padding: 8px 15px;
+                border-radius: 5px;font-size: 20px;weight: 100%;">
+                <a style="color: #f1f4f6; text-decoration: none;
+                margin-right: 20px;
+                font-size: 18px;" href="{% url 'deconnexion' %}">Deconnexion</a>
+                 <a style="color: #f1f4f6; text-decoration: none;
+                margin-right: 20px;
+                font-size: 18px;" href="{% url 'listerListe' %}">Voir les taches </a> 
+                     {% if user.is_authenticated and user.is_superuser %}
+            
+                        <a style="color: #f1f4f6; text-decoration: none;
+                        margin-right: 20px;font-size: 18px;" href="{% url 'listerClient' %}">Voir les  aides</a>
+                     {% endif %}
+            </nav>
+             <div style="width: 25%;margin:50px auto;">
+        {% if user.is_authenticated and user.is_superuser %}
+        <div style="display:flex; gap:20px;">
+                <a style=" color:blue;font-size:18px; text-decoration:none;" href="{% url 'AjouterListe' %}"> Ajouter element </a>
+                <a style=" color:blue;font-size:18px; text-decoration:none;" href="{% url 'home' %}">Retour</a>
+        </div>
+        {% endif %}
+        <br><br>
+       
+        <table border="1" >
+        <tr><th>Date</th><th>To do </th>
+            {% if user.is_authenticated and user.is_superuser %}
+             <th> Action </th></tr>
+                {% endif %}
+        {% for tache in listes %}
+        <tr>
+            <td>{{tache.date|date:"d/m/Y" }} </td>
+            <td> {{ tache.element }}</td>
+            {% if user.is_authenticated and user.is_superuser %}
+                    <td style="padding: 15px;"><a href="{% url 'ModifierListe' tache.num %}"> Modifier </a>|| <a href="{% url 'SupprimerListe'  tache.num %}"> Supprimer </a></td>
+            {% endif %}
+        </tr>
+            {% empty %}
+                <p>Aucune tache</p>
+            {% endfor %}
+            </table>
+        
+        </div>
+       
+         {% endblock %}
+
+</body>

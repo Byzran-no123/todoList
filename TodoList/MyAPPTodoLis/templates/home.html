@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+<body style=" margin:0; padding:0;">
+    {% block content %}
+     {% if request.user.is_authenticated %}
+    
+        <nav style="background-color: #0b0bf3;  padding: 8px 15px;
+    border-radius: 5px;font-size: 20px;">
+            <a style="color: #f1f4f6; text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;" href="{% url 'deconnexion' %}">Deconnexion</a>
+            <a style="color: #f1f4f6; text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;" href="{% url 'listerListe' %}">Voir les taches </a> 
+            {% if user.is_authenticated and user.is_superuser %}
+            <a style="color: #f1f4f6; text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;" href="{% url 'listerClient' %}">Voir les  aides</a>
+            {% endif %}
+        </nav>
+          
+             <br><p style="font-size: 50px;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;">Bienvenue 
+        <span style="text-align: center; ">
+            {{ request.user.username }} 
+        </span>
+    </p>
+          
+      
+
+    {% else %}
+
+        <a href="{% url 'connexion' %}">Connexion</a>
+        
+
+    {% endif %}
+    {% endblock %}
+    </body>

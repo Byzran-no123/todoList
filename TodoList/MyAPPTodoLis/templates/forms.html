@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+<body>
+    {% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+            <button type="submit">Enregistrer</button>
+            <a href="javascript:history.back()">Annuler</a>
+    </form>
+    {% endblock %}

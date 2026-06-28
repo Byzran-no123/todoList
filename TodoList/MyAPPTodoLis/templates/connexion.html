@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<body style="
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;">
+    {% block content %}
+    <div  style="
+    background-color: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+    margin: 50px auto;
+">
+        <h2 style=" color:blue; text-align: center;"> Connexion</h2>
+        <form method="POST" style=" text-align: center;">
+            {% csrf_token %}
+            {{form.as_p}}
+              <button type="submit" style=" background-color: blue; color: white;">Ss connecter</button>
+            
+        </form>
+        </div>
+        {% endblock %}
+    
+    </body>
